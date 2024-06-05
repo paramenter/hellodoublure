@@ -1,64 +1,97 @@
 package org.example;
 import java.util.*;
-// Sommedeséléments d'un tableau d'entiers
+
+/**
+ * Somme des éléments d'un tableau de nombres décimaux
+ */
 public class CalculTab {
-    private ArrayList<Integer> tab;
+    private ArrayList<Double> tab;
     private int i;
     private int n = 0;
-    private int Sum = 0;
-    private int lenghtTab;
-    /**Permet de definir la taille du tableau */
-    public CalculTab(int lenghtTab){
-        this.lenghtTab = lenghtTab;
-        n = lenghtTab;
+    private double sum = 0;
+    private int lengthTab;
+    private double minValue = 0.0;
+    private double maxValue = 20.0;
+
+    /** Permet de définir la taille du tableau */
+    public CalculTab(int lengthTab){
+        this.lengthTab = lengthTab;
+        n = lengthTab;
         tab = new ArrayList<>();
     }
-    /**Demande a utilisateur de rentrer tout les note dans le tableau */
-    public ArrayList<Integer> makeTab(){
+
+    /** Demande à l'utilisateur de rentrer tous les nombres dans le tableau */
+    public ArrayList<Double> makeTab(){
         tab = new ArrayList<>();
+        Scanner sc1 = new Scanner(System.in);
         for (i = 0; i < n; i++) {
-            System.out.println("Veuillez entrer un nombre");
-            Scanner sc1 = new Scanner(System.in);
-            tab.add(sc1.nextInt());
+            double value;
+            while (true) {
+                System.out.println("Veuillez entrer un nombre décimal (entre 0 et 20, avec jusqu'à 3 chiffres après la virgule) :");
+                value = sc1.nextDouble();
+                if (value >= minValue && value <= maxValue) {
+                    break;
+                } else {
+                    System.out.println("Erreur: Le nombre doit être entre " + minValue + " et " + maxValue + ". Veuillez réessayer.");
+                }
+            }
+            tab.add(value);
         }
         return tab;
     }
-    /** Affiche tout les note du tableau */
+
+    /** Affiche tous les nombres du tableau */
     public void afficherTab(){
-        System.out.println("Les élements de tableau sont : ");
+        System.out.println("Les éléments du tableau sont : ");
         for (i = 0; i < n; i++) {
-            System.out.println(tab.get(i));
+            System.out.printf("%.3f\n", tab.get(i));
         }
-    }
-    /**Calcule la somme des note entrée dans le tableau */
-    public int somme(){
-        Sum = 0;
-        for (i = 0; i < n; i++) {
-            Sum+=tab.get(i);
-        }
-        System.out.println("La somme des éléments est égale à " + Sum);
-        return Sum;
-    }
-    /**Calcule la moyenne des note entrée dans le tableau */
-    public double moyenne(){
-        return (double) somme() / tab.size();
     }
 
-    /**Calcule la mediane des note entrée dans le tableau */
+    /** Calcule la somme des nombres entrés dans le tableau */
+    public double somme(){
+        sum = 0;
+        for (i = 0; i < n; i++) {
+            sum += tab.get(i);
+        }
+        System.out.printf("La somme des éléments est égale à %.3f\n", sum);
+        return sum;
+    }
+
+    /** Calcule la moyenne des nombres entrés dans le tableau */
+    public double moyenne(){
+        double moy = somme() / tab.size();
+        System.out.printf("La moyenne des éléments est égale à %.3f\n", moy);
+        return moy;
+    }
+
+    /** Calcule la médiane des nombres entrés dans le tableau */
     public double mediane(){
         Collections.sort(tab);
-        if (lenghtTab % 2 == 0) {
-            return (tab.get(lenghtTab / 2 - 1) + tab.get(lenghtTab / 2)) / 2.0;
+        double med;
+        if (lengthTab % 2 == 0) {
+            med = (tab.get(lengthTab / 2 - 1) + tab.get(lengthTab / 2)) / 2.0;
         } else {
-            return tab.get(lenghtTab / 2);
+            med = tab.get(lengthTab / 2);
         }
+        System.out.printf("La médiane des éléments est égale à %.3f\n", med);
+        return med;
     }
 
     @Override
     public String toString() {
         return "CalculTab{" +
                 "tab=" + tab +
-                ", lenghtTab=" + lenghtTab +
+                ", lengthTab=" + lengthTab +
                 '}';
+    }
+
+    public static void main(String[] args) {
+        CalculTab calculTab = new CalculTab(5); // Example with 5 elements
+        calculTab.makeTab();
+        calculTab.afficherTab();
+        calculTab.somme();
+        calculTab.moyenne();
+        calculTab.mediane();
     }
 }

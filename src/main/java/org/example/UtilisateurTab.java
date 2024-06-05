@@ -16,17 +16,36 @@ public class UtilisateurTab {
     private double med;
 
 
-    public UtilisateurTab(String prenom, String nom, String email, String date) throws IllegalArgumentException {
-        if (!isValidEmail(email)) {
-            throw new IllegalArgumentException("Email non valide");
-        }else {
-            System.out.println("E-mail valide");
+    public UtilisateurTab() throws IllegalArgumentException {
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("Entrée le prénom :");
+        this.prenom = scan.next();
+
+        System.out.println("Entrée le nom :");
+        this.nom = scan.next();
+
+        while (true) {
+            System.out.println("Entrée le mail :");
+            this.email = scan.next();
+            if (!isValidEmail(this.email)) {
+                System.out.println("Email non valide. Veuillez réessayer.");
+            } else {
+                System.out.println("E-mail valide");
+                break;
+            }
         }
-        this.prenom = prenom;
-        this.nom = nom;
-        this.email = email;
-        this.date = date;
-        entreeNote();
+
+        while (true) {
+            System.out.println("Entrée la date (format jj/mm/aaaa) :");
+            this.date = scan.next();
+            if (!isValidDate(this.date)) {
+                System.out.println("Date non valide. Veuillez réessayer.");
+            } else {
+                System.out.println("Date valide");
+                break;
+            }
+        }
     }
     /** Verifie si email est valide*/
     public static boolean isValidEmail(String email) {
@@ -34,19 +53,26 @@ public class UtilisateurTab {
         Pattern pattern = Pattern.compile(emailRegex);
         return pattern.matcher(email).matches();
     }
+
+    /** Verifie si date est valide*/
+    public static boolean isValidDate(String date) {
+        String dateRegex = "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}$";
+        Pattern pattern = Pattern.compile(dateRegex);
+        return pattern.matcher(date).matches();
+    }
     /**  Le prof entre les notes des eleves */
-    public void entreeNote(){
+    public void entreeNote() {
         Scanner sc = new Scanner(System.in);
         int taille = 0;
         boolean validInput = false;
         while (!validInput) {
-            System.out.println("Veuillez entrer la taille du tableau : ");
+            System.out.println("Veuillez entrer la taille du tableau (doit être un nombre entier positif et inférieur ou égal à 50) : ");
             if (sc.hasNextInt()) {
                 taille = sc.nextInt();
-                if (taille > 0) {
+                if (taille > 0 && taille <= 50) {
                     validInput = true;
                 } else {
-                    System.out.println("La taille du tableau doit être un nombre entier positif. Veuillez réessayer.");
+                    System.out.println("La taille du tableau doit être un nombre entier positif et inférieur ou égal à 50. Veuillez réessayer.");
                 }
             } else {
                 System.out.println("Entrée non valide. Veuillez entrer un nombre entier.");
