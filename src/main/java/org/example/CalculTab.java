@@ -53,4 +53,12 @@ public class CalculTab {
             return tab.get(lenghtTab / 2);
         }
     }
+
+    @Override
+    public String toString() {
+        return "CalculTab{" +
+                "tab=" + tab +
+                ", lenghtTab=" + lenghtTab +
+                '}';
+    }
 }
