@@ -14,7 +14,6 @@ public class CalculTab {
     }
     public ArrayList<Integer> makeTab(){
         tab = new ArrayList<>();
-        System.out.println("****DEBUT PROGRAMME****");
         for (i = 0; i < n; i++) {
             System.out.println("Veuillez entrer un nombre");
             Scanner sc1 = new Scanner(System.in);

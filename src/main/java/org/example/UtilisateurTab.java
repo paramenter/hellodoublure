@@ -10,6 +10,8 @@ public class UtilisateurTab {
     public UtilisateurTab(String prenom, String nom, String email) throws IllegalArgumentException {
         if (!isValidEmail(email)) {
             throw new IllegalArgumentException("Email non valide");
+        }else {
+            System.out.println("E-mail valide");
         }
         this.prenom = prenom;
         this.nom = nom;

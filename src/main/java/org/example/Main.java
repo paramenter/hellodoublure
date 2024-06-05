@@ -29,5 +29,16 @@ public class Main {
         System.out.println("La moyenne des éléments est égale à " + moyenne);
         double mediane = calculTab.med();
         System.out.println("La médiane des éléments est égale à " + mediane);
+
+        System.out.println("/////////////////////UtilisateurTab/////////////////////");
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Entrée le prénom :");
+        String prenom = sc.next();
+        System.out.println("Entrée le nom :");
+        String nom = sc.next();
+        System.out.println("Entrée le mail :");
+        String mail = sc.next();
+        UtilisateurTab user = new UtilisateurTab(prenom, nom, mail);
+        System.out.println(user);
     }
 }
