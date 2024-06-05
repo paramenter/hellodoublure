@@ -1,0 +1,67 @@
+SCÉNARIO
+
+
+Tout est valide :
+
+L'enseignant s'est connecté (nom, prénom, adresse mail).
+La date est correcte (date du jour).
+L'enseignant est connecté et peut créer un tableau.
+Il entre la taille du tableau (comprise entre 0 et 36).
+Il met les notes dans son tableau (notes entre 0 et 20).
+Le tableau calcule la somme des notes.
+Le tableau donne la moyenne (somme des notes / nombre de notes).
+Le tableau donne la médiane (si la série est impaire, la médiane est la note du milieu; si la série est paire, la médiane est le chiffre situé entre les 2 données du milieu).
+
+
+Rien n'est valide :
+
+L'enseignant ne s'est pas connecté (nom faux, prénom faux, adresse mail fausse).
+La date n'est pas valide (ce n'est pas la date du jour).
+L'enseignant ne peut pas créer de tableau.
+On redemande le nom, prénom, mail et date à l'enseignant.
+
+
+C'est partiellement valide :
+
+L'enseignant s'est connecté correctement (nom, prénom, adresse mail).
+La date est valide (date du jour).
+L'enseignant est connecté et peut créer un tableau.
+La taille du tableau n'est pas bonne (supérieure à 36).
+On redemande à l'enseignant de mettre une taille valide (entre 0 et 36).
+Il entre des notes invalides dans le tableau (notes inférieures à 0, supérieures à 20 ou notes avec plus de 3 chiffres après la virgule).
+On redemande à l'enseignant de rentrer des notes valides (entre 0 et 20 avec 3 chiffres après la virgule maximum).
+Si tout est valide, on calcule la somme, la moyenne et la médiane.
+
+SCENARIO
+
+
+Everything is valid:
+
+The teacher has logged in (name, first name, email address).
+The date is correct (today's date).
+The teacher is logged in and can create a table.
+The teacher enters the size of the table (between 0 and 36).
+The teacher enters the grades in the table (grades between 0 and 20).
+The table calculates the sum of the grades.
+The table gives the average (sum of the grades / number of grades).
+The table gives the median (if the series has an odd number of elements, the median is the middle grade; if the series has an even number of elements, the median is the average of the two middle grades).
+
+
+Nothing is valid:
+
+The teacher has not logged in (wrong name, wrong first name, wrong email address).
+The date is not valid (not today's date).
+The teacher cannot create a table.
+The teacher is asked to re-enter their name, first name, email, and date.
+
+
+Partially valid:
+
+The teacher has logged in correctly (name, first name, email address).
+The date is valid (today's date).
+The teacher is logged in and can create a table.
+The size of the table is not correct (greater than 36).
+The teacher is asked to enter a valid size (between 0 and 36).
+The teacher enters invalid grades in the table (grades less than 0, greater than 20, or grades with more than 3 decimal places).
+The teacher is asked to enter valid grades (between 0 and 20 with up to 3 decimal places).
+If everything is valid, the sum, average, and median are calculated.
