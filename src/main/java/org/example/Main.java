@@ -3,28 +3,31 @@ package org.example;
 import java.util.Scanner;
 
 public class Main {
-
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        int len = 0;
-        boolean boucle = true;
-        do {
-            try {
-                System.out.println("Entrée le nombre d'étudiants");
-                len = scan.nextInt();
-                boucle = false;
-            }catch (Exception e){
-                System.out.println("Entrée un entier");
-                boucle = true;
+        Scanner sc = new Scanner(System.in);
+        int taille = 0;
+        boolean validInput = false;
+        while (!validInput) {
+            System.out.println("Veuillez entrer la taille du tableau : ");
+            if (sc.hasNextInt()) {
+                taille = sc.nextInt();
+                if (taille > 0) {
+                    validInput = true;
+                } else {
+                    System.out.println("La taille du tableau doit être un nombre entier positif. Veuillez réessayer.");
+                }
+            } else {
+                System.out.println("Entrée non valide. Veuillez entrer un nombre entier.");
+                sc.next();
             }
-            System.out.println(boucle);
-        }while (len < 0 && boucle);
-        System.out.println(len);
-        CalculTab cal = new CalculTab(len);
-        cal.makeTab();
-        cal.afficherTab();
-        cal.sum();
-        cal.med();
-        cal.moy();
+        }
+        CalculTab calculTab = new CalculTab(taille);
+        calculTab.makeTab();
+        calculTab.afficherTab();
+        calculTab.sum();
+        double moyenne = calculTab.moy();
+        System.out.println("La moyenne des éléments est égale à " + moyenne);
+        double mediane = calculTab.med();
+        System.out.println("La médiane des éléments est égale à " + mediane);
     }
 }

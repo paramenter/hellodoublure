@@ -9,6 +9,7 @@ public class CalculTab {
     private int lenghtTab;
     public CalculTab(int lenghtTab){
         this.lenghtTab = lenghtTab;
+        n = lenghtTab;
         tab = new int[lenghtTab];
     }
     public int[] makeTab(){
@@ -27,6 +28,7 @@ public class CalculTab {
         }
     }
     public int sum(){
+        Sum = 0;
         for (i = 0; i < n; i++) {
             Sum+=tab[i];
         }
