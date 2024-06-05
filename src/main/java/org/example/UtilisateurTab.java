@@ -2,6 +2,9 @@ package org.example;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;
+import java.io.FileWriter;
+import java.io.IOException;
+
 
 public class UtilisateurTab {
     private String prenom;
@@ -11,6 +14,7 @@ public class UtilisateurTab {
     private int nbEleve;
     private double moy;
     private double med;
+
 
     public UtilisateurTab(String prenom, String nom, String email, String date) throws IllegalArgumentException {
         if (!isValidEmail(email)) {
@@ -24,13 +28,13 @@ public class UtilisateurTab {
         this.date = date;
         entreeNote();
     }
-
+    /** Verifie si email est valide*/
     public static boolean isValidEmail(String email) {
         String emailRegex = "^[\\w.-]+@[\\w.-]+\\.[a-z]{2,}$";
         Pattern pattern = Pattern.compile(emailRegex);
         return pattern.matcher(email).matches();
     }
-
+    /**  Le prof entre les notes des eleves */
     public void entreeNote(){
         Scanner sc = new Scanner(System.in);
         int taille = 0;
@@ -56,6 +60,15 @@ public class UtilisateurTab {
         med = calculTab.mediane();
     }
 
+    public void stockerNote(){
+        String filePath = "output.csv";
+        try (FileWriter writer = new FileWriter(filePath, true)) {
+            writer.append(nom + ";" + prenom + ";" + email + ";" + date + ";" + nbEleve + ";" + moy + ";" + med);
+            System.out.println("Nouvelles données ajoutées avec succès !");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     public String toString() {
         return "UtilisateurTab{" +

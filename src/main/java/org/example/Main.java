@@ -14,9 +14,7 @@ public class Main {
         System.out.println("Entrée la date :");
         String date = scan.next();
         UtilisateurTab user = new UtilisateurTab(prenom, nom, mail, date);
-
-
-
         System.out.println(user);
+        user.stockerNote();
     }
 }
