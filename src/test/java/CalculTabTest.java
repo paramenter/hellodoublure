@@ -1,11 +1,13 @@
-package org.example;
-
+import org.example.CalculTab;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.lang.Object;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CalculTabTest {
 
@@ -18,9 +20,10 @@ public class CalculTabTest {
 
     @Test
     public void testMakeTab() {
-        ArrayList<Integer> expectedTab = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
-        calculTab.makeTab().addAll(expectedTab);
-        //assertThat(calculTab.makeTab()).equals(expectedTab);
+        CalculTab calculTab = new CalculTab(3);
+        ArrayList<Integer> expected = new ArrayList<>(Arrays.asList(1, 2, 3));
+        ArrayList<Integer> actual = calculTab.makeTab();
+        assertEquals(expected, actual, "OK");
     }
 
     @Test
