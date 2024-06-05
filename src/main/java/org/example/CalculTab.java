@@ -2,34 +2,46 @@ package org.example;
 import java.util.*;
 // Sommedeséléments d'un tableau d'entiers
 public class CalculTab {
-    public static void main(String[] args) {
-        int tab[] = new int[50];
-        int i;
-        int n = 0;
-        int Sum = 0;
-        // LA TAILLE DU TABLEAU
-        do {
-            System.out.println("Veuillez entrer la taille du tableau");
-            Scanner sc = new Scanner(System.in);
-            n =sc.nextInt();
-        } while (n > 50);
-        // REMPLISSAGE DE TABLEAU
+    private int[] tab;
+    private int i;
+    private int n = 0;
+    private int Sum = 0;
+    private int lenghtTab;
+    public CalculTab(int lenghtTab){
+        this.lenghtTab = lenghtTab;
+        tab = new int[lenghtTab];
+    }
+    public int[] makeTab(){
         System.out.println("****DEBUT PROGRAMME****");
         for (i = 0; i < n; i++) {
             System.out.println("Veuillez entrer un nombre");
             Scanner sc1 = new Scanner(System.in);
             tab[i] = sc1.nextInt();
         }
-        // AFFICHAGE DE TABLEAU
+        return tab;
+    }
+    public void afficherTab(){
         System.out.println("Les élements de tableau sont : ");
         for (i = 0; i < n; i++) {
             System.out.println(tab[i]);
         }
-        // AFFICHAGE DE SOMME
+    }
+    public int sum(){
         for (i = 0; i < n; i++) {
             Sum+=tab[i];
         }
         System.out.println("La somme des éléments est égale à " + Sum);
-        System.out.println("****FIN PROGRAMME****");
+        return Sum;
+    }
+    public double moy(){
+        return (double) sum() / tab.length;
+    }
+    public double med(){
+        Arrays.sort(tab);
+        if (lenghtTab % 2 == 0) {
+            return (tab[lenghtTab / 2 - 1] + tab[lenghtTab / 2]) / 2.0;
+        } else {
+            return tab[lenghtTab / 2];
+        }
     }
 }
