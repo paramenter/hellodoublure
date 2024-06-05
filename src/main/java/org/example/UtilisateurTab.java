@@ -63,7 +63,7 @@ public class UtilisateurTab {
     public void stockerNote(){
         String filePath = "output.csv";
         try (FileWriter writer = new FileWriter(filePath, true)) {
-            writer.append(nom + ";" + prenom + ";" + email + ";" + date + ";" + nbEleve + ";" + moy + ";" + med);
+            writer.append("\n" + nom + ";" + prenom + ";" + email + ";" + date + ";" + nbEleve + ";" + moy + ";" + med);
             System.out.println("Nouvelles données ajoutées avec succès !");
         } catch (IOException e) {
             e.printStackTrace();
