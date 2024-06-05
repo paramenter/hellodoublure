@@ -7,11 +7,13 @@ public class CalculTab {
     private int n = 0;
     private int Sum = 0;
     private int lenghtTab;
+    /**Permet de definir la taille du tableau */
     public CalculTab(int lenghtTab){
         this.lenghtTab = lenghtTab;
         n = lenghtTab;
         tab = new ArrayList<>();
     }
+    /**Demande a utilisateur de rentrer tout les note dans le tableau */
     public ArrayList<Integer> makeTab(){
         tab = new ArrayList<>();
         for (i = 0; i < n; i++) {
@@ -21,13 +23,15 @@ public class CalculTab {
         }
         return tab;
     }
+    /** Affiche tout les note du tableau */
     public void afficherTab(){
         System.out.println("Les élements de tableau sont : ");
         for (i = 0; i < n; i++) {
             System.out.println(tab.get(i));
         }
     }
-    public int sum(){
+    /**Calcule la somme des note entrée dans le tableau */
+    public int somme(){
         Sum = 0;
         for (i = 0; i < n; i++) {
             Sum+=tab.get(i);
@@ -35,10 +39,13 @@ public class CalculTab {
         System.out.println("La somme des éléments est égale à " + Sum);
         return Sum;
     }
-    public double moy(){
-        return (double) sum() / tab.size();
+    /**Calcule la moyenne des note entrée dans le tableau */
+    public double moyenne(){
+        return (double) somme() / tab.size();
     }
-    public double med(){
+
+    /**Calcule la mediane des note entrée dans le tableau */
+    public double mediane(){
         Collections.sort(tab);
         if (lenghtTab % 2 == 0) {
             return (tab.get(lenghtTab / 2 - 1) + tab.get(lenghtTab / 2)) / 2.0;

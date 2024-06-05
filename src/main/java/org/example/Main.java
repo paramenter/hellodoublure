@@ -24,10 +24,10 @@ public class Main {
         CalculTab calculTab = new CalculTab(taille);
         calculTab.makeTab();
         calculTab.afficherTab();
-        calculTab.sum();
-        double moyenne = calculTab.moy();
+        calculTab.somme();
+        double moyenne = calculTab.moyenne();
         System.out.println("La moyenne des éléments est égale à " + moyenne);
-        double mediane = calculTab.med();
+        double mediane = calculTab.mediane();
         System.out.println("La médiane des éléments est égale à " + mediane);
 
         System.out.println("/////////////////////UtilisateurTab/////////////////////");
