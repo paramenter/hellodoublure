@@ -1,0 +1,28 @@
+SCÉNARIO
+
+
+Étape 1 :
+Connection à la base de donnée :
+    - Entrée du login + password + email valide.
+    - ( pour le password : condition pro + cryptage)
+
+Étape 2 :
+BDD :
+    - Allimentation de la BDD ( mettre nos valeurs trouvé dans le dernier TP)
+    - CRUD : Create Read Update/Modify Delete
+    - BDD H2 :
+        ° 127.0.0.1 ou localhost
+        ° TP2 : tableau étudient note profe
+
+Tout est valide :
+
+- L'utilisateur rentre un login valide, un mot de passe conforme aux condition( pro, crypté) et un email valide.
+    Exemple : Vosges88, Pas$word!, voges.88@G1mail.com
+- Le système vérifie que le login, le mot de passe et l'email sont correct.
+- Le mot de passe est comparé à sa version crytpé
+- L'utilisateur est authentifier avec succès
+- Possibilite d'utiliser le CRUD
+
+
+Rien est valide :
+
