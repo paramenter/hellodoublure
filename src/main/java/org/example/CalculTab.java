@@ -13,6 +13,7 @@ public class CalculTab {
     private double minValue = 0.0;
     private double maxValue = 20.0;
 
+
     /** Permet de définir la taille du tableau */
     public CalculTab(int lengthTab){
         this.lengthTab = lengthTab;

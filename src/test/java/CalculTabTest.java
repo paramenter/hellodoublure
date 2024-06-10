@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CalculTabTest {
 
+
     private CalculTab calculTab;
 
     @BeforeEach
