@@ -1,6 +1,5 @@
 package org.example;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,26 +22,24 @@ public class Database {
         try {
             // Charger le driver H2
             Class.forName("org.h2.Driver");
-            // Établir la connexion
-            return DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-            return null;
+            // Établir la connexion au serveur H2
+            return DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test", "sa", "");
+        } catch (ClassNotFoundException e) {
+            System.out.println("H2 Driver not found: " + e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("SQL Exception: " + e.getMessage());
         }
+        return null;
     }
 
     public boolean isValideEmail(String email) {
-        // Utiliser une expression régulière pour valider l'email
         String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
         Pattern pat = Pattern.compile(emailRegex);
-        if (email == null)
-            return false;
-        return pat.matcher(email).matches();
+        return email != null && pat.matcher(email).matches();
     }
 
     public boolean isValideMDP(String mdp) {
-        // Vérifier si le mot de passe est assez fort
-        if (mdp.length() < 8) return false; // Minimum 8 caractères
+        if (mdp.length() < 8) return false;
         boolean hasUpper = false, hasLower = false, hasDigit = false, hasSpecial = false;
         for (char ch : mdp.toCharArray()) {
             if (Character.isUpperCase(ch)) hasUpper = true;
@@ -64,9 +61,13 @@ public class Database {
             return false;
         }
 
-        // Vérifier les informations d'identification dans la base de données
+        if (this.connection == null) {
+            System.out.println("Failed to connect to the database.");
+            return false;
+        }
+
         try {
-            String query = "SELECT COUNT(*) FROM users WHERE email = ? AND password = ?";
+            String query = "SELECT COUNT(*) FROM USERS WHERE email = ? AND password = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, this.email);
             preparedStatement.setString(2, this.mdp);
