@@ -27,10 +27,12 @@ public class Database {
     }
 
     public boolean isValideEmail(String email) {
+        if (email == null || email.isEmpty()) return false; // Ajout d'une vérification pour l'email null ou vide
         String emailRegex = "^[\\w.-]+@[\\w.-]+\\.[a-z]{2,}$";
         Pattern pat = Pattern.compile(emailRegex);
-        return email != null && pat.matcher(email).matches();
+        return pat.matcher(email).matches();
     }
+
 
     public boolean isValideMDP(String mdp) {
         if (mdp.length() < 8) return false;
