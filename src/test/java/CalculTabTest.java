@@ -21,29 +21,29 @@ public class CalculTabTest {
     @Test
     public void testMakeTab() {
         CalculTab calculTab = new CalculTab(3);
-        ArrayList<Integer> expected = new ArrayList<>(Arrays.asList(1, 2, 3));
-        ArrayList<Integer> actual = calculTab.makeTab();
+        ArrayList<Double> expected = new ArrayList<>(Arrays.asList(1., 2., 3.));
+        ArrayList<Double> actual = calculTab.makeTab();
         assertEquals(expected, actual, "OK");
     }
 
     @Test
     public void testAfficherTab() {
-        ArrayList<Integer> expectedTab = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
+        ArrayList<Double> expectedTab = new ArrayList<>(Arrays.asList(1., 2., 3., 4., 5.));
         calculTab.makeTab().addAll(expectedTab);
         calculTab.afficherTab();
     }
 
     @Test
     public void testSomme() {
-        ArrayList<Integer> tabValues = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
+        ArrayList<Double> tabValues = new ArrayList<>(Arrays.asList(1., 2., 3., 4., 5.));
         calculTab.makeTab().addAll(tabValues);
-        int sum = calculTab.somme();
-        assertThat(sum).equals(15);
+        double sum = calculTab.somme();
+        assertThat(sum).equals(15.);
     }
 
     @Test
     public void testMoyenne() {
-        ArrayList<Integer> tabValues = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
+        ArrayList<Double> tabValues = new ArrayList<>(Arrays.asList(1., 2., 3., 4., 5.));
         calculTab.makeTab().addAll(tabValues);
         double average = calculTab.moyenne();
         assertThat(average).equals(3.0);
@@ -51,7 +51,7 @@ public class CalculTabTest {
 
     @Test
     public void testMediane() {
-        ArrayList<Integer> tabValues = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
+        ArrayList<Double> tabValues = new ArrayList<>(Arrays.asList(1., 2., 3., 4., 5.));
         calculTab.makeTab().addAll(tabValues);
         double median = calculTab.mediane();
         assertThat(median).equals(3.0);
