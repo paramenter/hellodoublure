@@ -27,7 +27,7 @@ public class Database {
     }
 
     public boolean isValideEmail(String email) {
-        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        String emailRegex = "^[\\w.-]+@[\\w.-]+\\.[a-z]{2,}$";
         Pattern pat = Pattern.compile(emailRegex);
         return email != null && pat.matcher(email).matches();
     }
