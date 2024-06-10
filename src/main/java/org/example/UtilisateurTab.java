@@ -37,7 +37,7 @@ public class UtilisateurTab {
         }
 
         while (true) {
-            System.out.println("Entrée la date (format jj/mm/aaaa) :");
+            System.out.println("Entrée la date (format aaaa-mm-jj) :");
             this.date = scan.next();
             if (!isValidDate(this.date)) {
                 System.out.println("Date non valide. Veuillez réessayer.");
@@ -56,7 +56,7 @@ public class UtilisateurTab {
 
     /** Verifie si date est valide*/
     public static boolean isValidDate(String date) {
-        String dateRegex = "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}$";
+        String dateRegex = "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$";
         Pattern pattern = Pattern.compile(dateRegex);
         return pattern.matcher(date).matches();
 
