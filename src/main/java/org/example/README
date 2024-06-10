@@ -32,6 +32,8 @@ Il entre des notes invalides dans le tableau (notes inférieures à 0, supérieu
 On redemande à l'enseignant de rentrer des notes valides (entre 0 et 20 avec 3 chiffres après la virgule maximum).
 Si tout est valide, on calcule la somme, la moyenne et la médiane.
 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 SCENARIO
 
 
