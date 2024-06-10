@@ -1,20 +1,14 @@
 package org.example;
 
+import java.sql.*;
 import java.util.regex.Pattern;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class Database {
     private String email;
     private String mdp;
     private Connection connection;
 
-    public Database(String email, String mdp){
-        this.email = email;
-        this.mdp = mdp;
+    public Database(){
         this.connection = getConnection();
     }
 
@@ -50,13 +44,13 @@ public class Database {
         return hasUpper && hasLower && hasDigit && hasSpecial;
     }
 
-    public boolean authenticate() {
-        if (!isValideEmail(this.email)) {
+    public boolean authenticate(String email, String mdp) {
+        if (!isValideEmail(email)) {
             System.out.println("Invalid email format.");
             return false;
         }
 
-        if (!isValideMDP(this.mdp)) {
+        if (!isValideMDP(mdp)) {
             System.out.println("Password is not strong enough.");
             return false;
         }
@@ -69,8 +63,8 @@ public class Database {
         try {
             String query = "SELECT COUNT(*) FROM USERS WHERE email = ? AND password = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, this.email);
-            preparedStatement.setString(2, this.mdp);
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, mdp);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 int count = resultSet.getInt(1);
@@ -81,13 +75,60 @@ public class Database {
         }
         return false;
     }
-
-    public static void main(String[] args) {
-        Database db = new Database("test@example.com", "Password123!");
-        if (db.authenticate()) {
-            System.out.println("Authentication successful.");
-        } else {
-            System.out.println("Authentication failed.");
+    public void displayStudents() {
+        if (this.connection == null) {
+            System.out.println("Failed to connect to the database.");
+            return;
         }
+
+        try (Statement stmt = connection.createStatement()) {
+            ResultSet rs = stmt.executeQuery("SELECT * FROM STUDENTS");
+            while (rs.next()) {
+                System.out.println(
+                        "Nom: " + rs.getString("nom") +
+                                ", Prénom: " + rs.getString("prenom") +
+                                ", Email: " + rs.getString("mail") +
+                                ", Date: " + rs.getDate("date") +
+                                ", Nombre de notes: " + rs.getInt("nbNote") +
+                                ", Moyenne: " + rs.getDouble("moyenne") +
+                                ", Médiane: " + rs.getDouble("mediane")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addStudent(String nom, String prenom, String mail, String date, int nbNote, double moyenne, double mediane) {
+        if (this.connection == null) {
+            System.out.println("Failed to connect to the database.");
+            return;
+        }
+
+        String query = "INSERT INTO STUDENTS (nom, prenom, mail, date, nbNote, moyenne, mediane) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.setString(1, nom);
+            pstmt.setString(2, prenom);
+            pstmt.setString(3, mail);
+            pstmt.setDate(4, java.sql.Date.valueOf(date));
+            pstmt.setInt(5, nbNote);
+            pstmt.setDouble(6, moyenne);
+            pstmt.setDouble(7, mediane);
+
+            int rowsInserted = pstmt.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("A new student was inserted successfully!");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void main(String[] args) {
+        Database db = new Database();
+        // Ajouter un nouvel étudiant
+        db.addStudent("nouveau", "etudiant", "nouveau@etudiant.com", "2024-06-15", 3, 15.5, 14.0);
+
+        // Affiche les étudiants après ajout
+        db.displayStudents();
     }
 }

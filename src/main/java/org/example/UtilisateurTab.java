@@ -88,13 +88,22 @@ public class UtilisateurTab {
     }
 
     public void stockerNote(){
-        String filePath = "output.csv";
-        try (FileWriter writer = new FileWriter(filePath, true)) {
-            writer.append("\n" + nom + ";" + prenom + ";" + email + ";" + date + ";" + nbEleve + ";" + moy + ";" + med);
-            System.out.println("Nouvelles données ajoutées avec succès !");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Database db = new Database();
+        Scanner scan = new Scanner(System.in);
+        String email = "", mdp = "";
+        int i = 0;
+        do{
+            if (i == 3) {
+                System.out.println("Trop erreure mdp");
+                return;
+            }
+            System.out.println("Entrer mail");
+            email = scan.nextLine();
+            System.out.println("Entrer mdp");
+            mdp = scan.nextLine();
+            i++;
+        }while (!db.authenticate(email, mdp));
+        db.addStudent(nom, prenom, this.email, date, nbEleve, moy, med);
     }
     @Override
     public String toString() {
